@@ -1,27 +1,17 @@
-app.factory('Camera', ['$q',"$cordovaCamera" function($q , $cordovaCamera) {
+app.factory('Camera', ['$q', function($q) {
 
   return {
-  getPicture : function () {
+    getPicture: function(options) {
+      var q = $q.defer();
 
-    var options = {
-          quality: 50,
-          destinationType: Camera.DestinationType.DATA_URL,
-          sourceType: Camera.PictureSourceType.CAMERA,
-          allowEdit: true,
-          encodingType: Camera.EncodingType.JPEG,
-          targetWidth: 100,
-          targetHeight: 100,
-          popoverOptions: CameraPopoverOptions,
-          saveToPhotoAlbum: false
-    };
+      navigator.camera.getPicture(function(result) {
+        // Do any magic you need
+        q.resolve(result);
+      }, function(err) {
+        q.reject(err);
+      }, options);
 
-    $cordovaCamera.getPicture(options).then(function(imageData) {
-      var image = document.getElementById('myImage');
-      image.src = "data:image/jpeg;base64," + imageData;
-    }, function(err) {
-      // error
-    });
-
-    };
-  };
+      return q.promise;
+    }
+  }
 }]);

@@ -5,7 +5,8 @@
 <div class=" list card">
  <div class="item">
   <button ng-click="getPhoto()" class="button button-block button-calm icon ion-camera"> Fotograf Çek</button>
-  <img ng-src="{{lastPhoto}}" style="max-width: 100%">
+  <img ng-show="imageUrl===undefined" ng-src="../img/irfan.jpg" style="max-width: 100%">
+  <img ng-show="imageUrl!==undefined" ng-src="{{imageUrl}}" style="max-width: 100%">
   </div>
   <div class="item item-body">
   <textarea name="" id="" rows="3" style="width:100%;" placeholder="   Açıklama"></textarea>
@@ -21,6 +22,7 @@
   </label>
   
     <div class="item range range-assertive">
+    <label class="item">Önem Derecesi :   </label>
     <i class="icon ion-ios-star-outline"></i>
     <input type="range" name="volume" min="0" max="100" value="33">
     <i class="icon ion-ios-star"></i>

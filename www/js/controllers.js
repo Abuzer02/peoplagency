@@ -1,4 +1,4 @@
-var app = angular.module('starter.controllers', []);
+var app = angular.module('starter.controllers', ["ngCordova"]);
 
 app.controller('menuController', function($rootScope, $scope, $state, Session){
     $scope.cikis_yap = function (){

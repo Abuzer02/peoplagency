@@ -1,0 +1,32 @@
+<ion-view title="Bildirim Yap">
+
+
+<ion-content>
+<div class=" list card">
+ <div class="item">
+  <button ng-click="getPhoto()" class="button button-block button-calm icon ion-camera"> Fotograf Çek</button>
+  <img ng-src="{{lastPhoto}}" style="max-width: 100%">
+  </div>
+  <div class="item item-body">
+  <textarea name="" id="" rows="3" style="width:100%;" placeholder="   Açıklama"></textarea>
+  <label class="item item-input item-select">
+    <div class="input-label">
+      Kategori Seçiniz : 
+    </div>
+    <select>
+      <option>Polis</option>
+      <option selected>Hastane</option>
+      <option>Belediye</option>
+    </select>
+  </label>
+  
+    <div class="item range range-assertive">
+    <i class="icon ion-ios-star-outline"></i>
+    <input type="range" name="volume" min="0" max="100" value="33">
+    <i class="icon ion-ios-star"></i>
+  </div>
+  <button class="button button-block button-calm">Bildirim Yap</button>
+  </div>
+</div>
+</ion-content>
+</ion-view>

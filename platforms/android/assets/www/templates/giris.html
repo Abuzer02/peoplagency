@@ -1,0 +1,58 @@
+<ion-view title='Giris'>
+    <ion-content>
+       <br>
+       <br>
+       <br>
+       <br>
+        <div class="row">
+            <div class="col text-center">
+                <img src="img/logo.png" style="width:200px;" class="img-responsive" alt="">
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col text-center">
+                <h3>Hosgeldiniz</h3>
+            </div>
+        </div>
+        <form name='giris_form' ng-submit='girisYap()'>
+            <div class="list list-inset">
+              <label class="item item-input">
+                <i class="icon ion-person placeholder-icon"></i>
+                <input type="text" placeholder="Email" ng-model='kullanici.email' required>
+              </label>
+              <label class="item item-input">
+                <i class="icon ion-locked placeholder-icon"></i>
+                <input type="text" placeholder="Sifre" ng-model='kullanici.sifre' required>
+              </label>
+              <button class="button button-block button-calm" ng-disabled='giris_form.$invalid'>
+                Giris Yap
+              </button>
+            </div>
+        </form>
+        <div class="row text-center">
+            <div class="col-50 text-right">
+                <h4 style="margin-top:3px">Beni hatirla !&nbsp;&nbsp;</h4>
+            </div>
+            <div class="col-50 text-left">
+                <label class="toggle toggle-calm">
+                   <input type="checkbox" class="calm">
+                   <div class="track">
+                     <div class="handle"></div>
+                   </div>
+                </label>
+            </div>
+        </div>
+    </ion-content>
+    <div class="bar bar-footer">
+        <div class="row">
+            <div class="col-50 text-right" style="margin-top:10px;">
+                <h5 style="margin-top:-3px;font-size:17px;font-weight:300">Hesabiniz yok mu ? </h5>
+            </div>
+            <div class="col-50 text-left">
+                <button style="margin-bottom:10px;" class="button button-clear button-calm" ng-click="kayit_ol_git()"> Hesap Olusturun</button>
+            </div>
+        </div>
+    </div>
+</ion-view>

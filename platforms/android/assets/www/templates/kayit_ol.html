@@ -1,0 +1,50 @@
+<ion-view title='Kayit Ol'>
+    <div class="bar bar-header">
+        <button style="margin-bottom:10px;" class="button button-clear button-calm" ng-click="giris_yap_don()"><i class="ion-arrow-left-a"></i> Giris Yap</button>
+    </div>
+    <ion-content>
+        <h4 class="text-center">Kayit Ol</h4>
+        <br>
+        <br>
+        <form name="kayit_form" ng-submit='kayit_ol()'>
+            <div class="card">
+              <label class="item item-input">
+                <input type="text" placeholder="Isim" ng-model="kullanici.isim" required>
+              </label>
+              <label class="item item-input">
+                <input type="text" placeholder="Soyisim" ng-model="kullanici.soyisim" required>
+              </label><label class="item item-input">
+                <input type="text" placeholder="Email" ng-model="kullanici.email" required>
+              </label><label class="item item-input">
+                <input type="text" placeholder="Sifre" ng-model="kullanici.sifre" type="password" required>
+              </label><label class="item item-input">
+                <input type="text" placeholder="Gsm" ng-model="kullanici.gsm1" required>
+              </label>
+            </div>
+            <div class="row">
+               <div class="col-10 text-right">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model='kullanimPolitikasi' required>
+                    </label>
+                </div>
+                <div class="col-90 text-left">
+                    <h4 style="margin-top:9px"><a style="text-decoration:none;margin-top:6px;color:#28a54c">Kullanim politikasini</a> okudum. Kabul ediyorum</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button type="submit" class="button button-block button-calm" ng-disabled='kayit_form.$invalid'>
+                        Kayit Ol
+                    </button>
+                </div>
+            </div>
+        </form>
+    </ion-content>
+    <div class="bar bar-footer">
+        <div class="row">
+            <div class="col text-center">
+                <h5 style="margin-top:-3px"><i class="ion-social-apple"></i>&nbsp;Copyright Mavikent Bilisim 2015</h5>
+            </div>
+        </div>
+    </div>
+</ion-view>

@@ -9,12 +9,19 @@
   <img ng-show="imageUrl!==undefined" ng-src="{{imageUrl}}" style="max-width: 100%">
   </div>
   <div class="item item-body">
-  <textarea name="" id="" rows="3" style="width:100%;" placeholder="   Açıklama" ng-model="icerik"></textarea>
+  <label class="item item-input item-floating-label">
+    <span class="input-label">Başlık</span>
+    <input type="text" placeholder="Başlık" ng-model="data.baslik">
+  </label>
+  <label class="item item-input item-floating-label">
+    <span class="input-label">Açıklama</span>
+    <input type="text" placeholder="Açıklama" ng-model="data.icerik">
+  </label>
   <label class="item item-input item-select">
     <div class="input-label">
       Kategori Seçiniz : 
     </div>
-    <select ng-model="kategori">
+    <select ng-model="data.kategori">
       <option>Polis</option>
       <option selected>Hastane</option>
       <option>Belediye</option>
@@ -22,9 +29,9 @@
   </label>
   
     <div class="item range range-assertive">
-    <label class="item padding-right">Önem Derecesi :   </label>
+    <label class="item padding-left">Önem Derecesi :   </label>
     <i class="icon ion-ios-star-outline"></i>
-    <input type="range" name="volume" min="0" max="100" value="33">
+    <input type="range" ng-model="data.onemDerecesi" name="volume" min="0" max="100" value="33">
     <i class="icon ion-ios-star"></i>
   </div>
   <button class="button button-block button-calm" ng-click="sendData()">Bildirim Yap</button>

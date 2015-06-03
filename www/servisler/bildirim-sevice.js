@@ -9,7 +9,11 @@ app.factory('Camera', ['$q', function($q) {
         q.resolve(result);
       }, function(err) {
         q.reject(err);
-      }, options);
+      }, {
+        quality : 50,
+        targetWidth: 1024,
+        targetHeight: 1024,
+      });
 
       return q.promise;
     }

@@ -1,5 +1,6 @@
 {
     "jscodehints.detectedExclusions": [
-        "C:/workspace/peopleagency/www/servisler/bildirim-sevice.js"
+        "C:/workspace/peopleagency/www/servisler/bildirim-sevice.js",
+        "/Users/irfanhasbek/Desktop/workspace/peoplagency/www/js/app.js"
     ]
 }

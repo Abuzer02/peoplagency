@@ -1,7 +1,7 @@
 <ion-view title='Kayit Ol'>
     <div class="bar bar-header">
         <button style="margin-bottom:10px;" class="button button-clear button-calm" ng-click="giris_yap_don()"><i class="ion-arrow-left-a"></i> Giris Yap</button>
-    </div>
+       </div>
     <ion-content>
         <h4 class="text-center">Kayit Ol</h4>
         <br>
@@ -9,16 +9,16 @@
         <form name="kayit_form" ng-submit='kayit_ol()'>
             <div class="card">
               <label class="item item-input">
-                <input type="text" placeholder="Isim" ng-model="kullanici.isim" required>
+                <input type="text" placeholder="E-mail" ng-model="kullanici.email" required>
               </label>
               <label class="item item-input">
-                <input type="text" placeholder="Soyisim" ng-model="kullanici.soyisim" required>
-              </label><label class="item item-input">
-                <input type="text" placeholder="Email" ng-model="kullanici.email" required>
-              </label><label class="item item-input">
-                <input type="text" placeholder="Sifre" ng-model="kullanici.sifre" type="password" required>
-              </label><label class="item item-input">
-                <input type="text" placeholder="Gsm" ng-model="kullanici.gsm1" required>
+                <input type="text" placeholder="Şifre" ng-model="kullanici.password" required>
+              </label>
+                <label class="item item-input">
+                <input type="text" placeholder="Kullanıcı Adı" ng-model="kullanici.nickname" required>
+              </label>
+                <label class="item item-input">
+                <input type="text" placeholder="Tel. No" ng-model="kullanici.phone_number" required>
               </label>
             </div>
             <div class="row">

@@ -1,0 +1,27 @@
+<ion-modal-view>
+<ion-header-bar class="bar bar-header bar-calm">
+  <h1 class="title">Yorumlar</h1>
+  <button class="button button-clear" ng-click="yorum_modal.hide()">X</button>
+</ion-header-bar>
+<ion-content class="padding">
+  <ion-list>
+  <ion-item class="item-avatar-left" ng-repeat="comment in commentList">
+    <img ng-src="{{comment.accountInfo.profile_picture}}">
+    <h2 ng-bind="comment.accountInfo.nickname"></h2>
+    <p ng-bind="comment.text"></p>
+  </ion-item>
+</ion-list>
+
+</ion-content>
+<ion-footer-bar>
+ <div class="row row-bottom">
+      <div class="col col-75">
+          <label class="item item-input item-floating-label">
+            <span class="input-label">Yorumun</span>
+            <input type="text" placeholder="Yorum Yap">
+          </label>
+      </div>
+      <div class="col"><button class="button button-full button-calm">Yorum Yap</button></div>
+    </div>
+</ion-footer-bar>
+</ion-modal-view>

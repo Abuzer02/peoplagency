@@ -6,25 +6,26 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers',"ngCordova"])
 
-.run(function($ionicPlatform, $rootScope) {
-    $rootScope.$on('$stateChangeStart', function(e, toState, toParams, fromState, fromParams) {
-        if(toState.name != 'giris' && toState.name != 'kayit_ol' && !$rootScope.girisYapildi){
-            e.preventDefault();
-        }
-    });
-    $rootScope.$on('$stateChangeSuccess', function(e, toState, toParams, fromState, fromParams) {
-        
-    });
+.run(function($ionicPlatform, $rootScope, $ionicLoading) {
+    $rootScope.showLoading = function() {
+        $ionicLoading.show({
+          template: '<img src="img/loading.gif"/>',
+          showBackdrop : true
+        });
+    };
+    $rootScope.hideLoading = function(){
+        $ionicLoading.hide();
+    };
     $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if (window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.hide();
-    }
+        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+        // for form inputs)
+        if (window.cordova && window.cordova.plugins.Keyboard) {
+          cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        }
+        if (window.StatusBar) {
+          // org.apache.cordova.statusbar required
+          StatusBar.hide();
+        }
   });
 })
 

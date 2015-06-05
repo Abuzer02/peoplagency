@@ -5,33 +5,28 @@
 <div class=" list card">
  <div class="item">
   <button ng-click="getPhoto()" class="button button-block button-calm icon ion-camera"> Fotograf Çek</button>
-  <img ng-show="imageUrl===undefined" ng-src="../img/irfan.jpg" style="max-width: 100%">
-  <img ng-show="imageUrl!==undefined" ng-src="{{imageUrl}}" style="max-width: 100%">
+  <img class="full-image" ng-show="imageUrl===undefined" ng-src="http://placehold.it/300x150" style="max-width: 100%;height:320px;">
+  <img class="full-image" ng-show="imageUrl!==undefined" ng-src="{{imageUrl}}" style="max-width: 100%;height:320px;" >
   </div>
   <div class="item item-body">
   <label class="item item-input item-floating-label">
     <span class="input-label">Başlık</span>
-    <input type="text" placeholder="Başlık" ng-model="data.baslik">
+    <input type="text" placeholder="Başlık" ng-model="data.title">
   </label>
   <label class="item item-input item-floating-label">
     <span class="input-label">Açıklama</span>
-    <input type="text" placeholder="Açıklama" ng-model="data.icerik">
+    <input type="text" placeholder="Açıklama" ng-model="data.description">
   </label>
-  <label class="item item-input item-select">
-    <div class="input-label">
-      Kategori Seçiniz : 
-    </div>
-    <select ng-model="data.kategori">
-      <option>Polis</option>
-      <option selected>Hastane</option>
-      <option>Belediye</option>
-    </select>
+  <label class="item item-input item-floating-label">
+    <input type="submit" class="button button-block button-clear button-calm" value="Kategori Seç" ng-click="kategori_sec()">
   </label>
-  
+   <label class="item item-input item-floating-label">
+        <a class="subdued" ng-repeat="category in data.alert_tags" ng-bind="category" style="font-weight:bold;"></a>
+  </label>
     <div class="item range range-assertive">
     <label class="item padding-left">Önem Derecesi :   </label>
     <i class="icon ion-ios-star-outline"></i>
-    <input type="range" ng-model="data.onemDerecesi" name="volume" min="0" max="100" value="33">
+    <input type="range" ng-model="data.importance_level" name="volume" min="0" max="100" value="33">
     <i class="icon ion-ios-star"></i>
   </div>
   <button class="button button-block button-calm" ng-click="sendData()">Bildirim Yap</button>

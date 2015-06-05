@@ -1,0 +1,22 @@
+<div class="modal">
+<header class="bar bar-header bar-calm">
+<h1 class="title">Kategori Seç</h1>
+<div class="button button-clear" ng-click="kategori_modal.hide()"><span class="icon ion-close"></span></div>
+</header>
+<content has-header="true" padding="true">
+    <div class="list">
+        
+        <div class="item item-divider"> 
+          Settings
+        </div>
+        
+        <ion-toggle ng-repeat="item in itemList"
+                    ng-model="item.checked" 
+                    ng-checked="item.checked">
+          {{ item.text }}
+        </ion-toggle>
+    </div>
+</content>
+<div class="bar bar-footer">
+    <button style="margin-top:-3px;height:40px;" class="button button-full button-balanced" ng-click="kategoriAl()">Kaydet</button>
+</div>

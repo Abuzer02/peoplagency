@@ -3,89 +3,43 @@
     <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
   <ion-content class="has-header">
-    <div class="list card">
-
+    <div class="list card" ng-repeat="item in itemList track by $index">
       <div class="item item-avatar">
-      <img src="https://avatars3.githubusercontent.com/u/3084207?v=3&s=400">
-        <h2>Marty McFly</h2>
-        <a class="energized">beklemede </a>
+      <img ng-src="{{item.accountInfo.profile_picture}}">
+        <h2 ng-bind="item.accountInfo.nickname"></h2>
+        <a class="energized">{{item.obj.status}} </a>
         <p>
           <a class="" style="font-weight:bold;">Kategori :</a>
-          <a class="subdued">Yangın</a>
-           <a class="subdued">01.03.2015</a> 
+          <a class="subdued" ng-repeat="category in item.obj.alert_tags">{{category}}</a>
         </p>
+        <p>{{item.obj.create_time}}</p> 
       </div>
       <div class="item item-body">
-        <img class="full-image" src="http://pic-zoom.com/media/images/picture-wallpaper.jpg">
-        <p style="font-weight:bold;">Başlık</p>
+        <img class="full-image" ng-src="{{item.obj.picture_path}}">
+        <p style="font-weight:bold;">{{item.obj.title}}</p>
         <p>
-          This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
-          the content is from a card-body consisting of an image and paragraph text. The footer
-          consists of tabs, icons aligned left, within the card-footer.
+          {{item.obj.description}}
         </p>
         <p>
-          <a href="#" class="subdued">1 Doğrulama</a>
-          <a href="#" class="subdued">5 Yorum</a>
-          <a href="#" class="subdued">5 Yalanlama</a>
+          <a href="#" class="subdued"><a id="verifyCount{{item.obj._id}}">{{item.obj.verify_count}}</a> Doğrulama</a>   
+          <a href="#" class="subdued"><a id="commentCount{{item.obj._id}}">{{item.obj.comment_count}}</a> Yorum</a>   
+          <a href="#" class="subdued"><a id="refuteCount{{item.obj._id}}">{{item.obj.refute_count}}</a> Yalanlama</a>   
         </p>
       </div>
       <div class="item tabs tabs-secondary tabs-icon-left">
-        <a class="tab-item" href="#">
+        <a class="tab-item" href="#" ng-click="verify(item.obj._id)">
           <i class="icon ion-checkmark-circled balanced"></i>
           Doğrula
         </a>
-        <a class="tab-item" href="#">
+        <a class="tab-item" href="#" ng-click="comment(item.obj._id)">
           <i class="icon ion-chatbox calm"></i>
           Yorum
         </a>
-        <a class="tab-item" href="#">
+        <a class="tab-item" href="#" ng-click="refute(item.obj._id)">
           <i class="icon ion-close-circled assertive"></i>
           Yalanla
         </a>
-      </div>
-      <button class="button button-block icon ion-log-in button-calm"> Ayrınltılar</button>    
-    </div>
-     <div class="list card">
-
-      <div class="item item-avatar">
-      <img src="https://avatars3.githubusercontent.com/u/3084207?v=3&s=400">
-        <h2>Marty McFly</h2>
-        <a class="balanced">çözüldü</a>
-        <p>
-          <a class="" style="font-weight:bold;">Kategori :</a>
-          <a class="subdued">Yangın</a>
-           <a class="subdued">01.03.2015</a> 
-        </p>
-      </div>
-      <div class="item item-body">
-        <img class="full-image" src="http://pic-zoom.com/media/images/picture-wallpaper.jpg">
-        <p style="font-weight:bold;">Başlık</p>
-        <p>
-          This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
-          the content is from a card-body consisting of an image and paragraph text. The footer
-          consists of tabs, icons aligned left, within the card-footer.
-        </p>
-        <p>
-          <a href="#" class="subdued">1 Doğrulama</a>
-          <a href="#" class="subdued">5 Yorum</a>
-          <a href="#" class="subdued">5 Yalanlama</a>
-        </p>
-      </div>
-      <div class="item tabs tabs-secondary tabs-icon-left">
-        <a class="tab-item" href="#">
-          <i class="icon ion-checkmark-circled balanced"></i>
-          Doğrula
-        </a>
-        <a class="tab-item" href="#">
-          <i class="icon ion-chatbox calm"></i>
-          Yorum
-        </a>
-        <a class="tab-item" href="#">
-          <i class="icon ion-close-circled assertive"></i>
-          Yalanla
-        </a>
-      </div>
-      <button class="button button-block icon ion-log-in button-calm"> Ayrınltılar</button>    
+      </div>    
     </div>
   </ion-content>
 </ion-view>

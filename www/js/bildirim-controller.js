@@ -1,5 +1,5 @@
 app
-    .controller('BildirimCtrl', function($rootScope,$scope,$state,Camera, Session, $http, $ionicPlatform, $cordovaFileTransfer,$cordovaGeolocation,$ionicModal,myStorage) {
+    .controller('BildirimCtrl', function($rootScope,$scope,$state,Camera, Session, $http, $ionicPlatform, $cordovaFileTransfer,$cordovaGeolocation,$ionicModal,myStorage,$ionicPopup) {
         var id=myStorage.getObject("session")._id;
         var category=[];
         $scope.data={
@@ -60,7 +60,10 @@ app
                             var resp = JSON.parse(result.response);
                             $scope.data.picture_path =resp.data;
                         }, function(error) {
-                            alert("Yukleme Hatası");
+                            $ionicPopup.alert({
+                                 title: 'peoplagency',
+                                 template: "hata oluştu!!!"
+                               });
                         });
 
                 }, false);
@@ -81,7 +84,10 @@ app
                 $http.post(Config.host+"/v1/report/register",$scope.data).success(function(result){
                     if(result.status!==200){
                         $rootScope.hideLoading();
-                        alert("hata oluştu 500");
+                         $ionicPopup.alert({
+                                 title: 'peoplagency',
+                                 template: "hata oluştu!!!"
+                               });
                         return;
                     }
                     $rootScope.hideLoading();
@@ -105,7 +111,10 @@ app
               });
             }, function(err) {
               $rootScope.hideLoading();
-              alert("Hata!!! lokasyon alınamadı lütfen konum izinlerini düzenleyiniz.");
+               $ionicPopup.alert({
+                                 title: 'peoplagency',
+                                 template: "hata oluştu!!!"
+                               });
             });
 
         };

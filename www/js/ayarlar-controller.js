@@ -1,4 +1,4 @@
-app.controller("AyarlarController",function($rootScope,$scope,myStorage,$http,$ionicPlatform,Camera,$cordovaFileTransfer){
+app.controller("AyarlarController",function($rootScope,$scope,myStorage,$http,$ionicPlatform,Camera,$cordovaFileTransfer,$ionicPopup){
     
     $scope.fotografYukle = function() {
             Camera.getPicture().then(function(imageURI) {
@@ -13,7 +13,6 @@ app.controller("AyarlarController",function($rootScope,$scope,myStorage,$http,$i
                   $cordovaFileTransfer.upload(Config.host + "/v1/files/upload", encodeURI(imageURI), options)
                     .then(function(result) {
                         var resp = JSON.parse(result.response);
-                        alert(JSON.stringify(resp.data));
                         $rootScope.session.profile_picture = resp.data;
                         $rootScope.hideLoading();
                     }, function(error) {
@@ -22,20 +21,29 @@ app.controller("AyarlarController",function($rootScope,$scope,myStorage,$http,$i
 
             }, false); 
             }, function(err) {
-                console.err(err);
+                 $ionicPopup.alert({
+                     title: 'peoplagency',
+                     template: "hata oluştu!!!"
+                   });
             });
         };
     
     $scope.updateAccount=function(){ 
         $http.post(Config.host+"/v1/account/update",$rootScope.session).success(function(result){
             if(result.status==404){
-                alert("hata oluştu 404");
+                 $ionicPopup.alert({
+                     title: 'peoplagency',
+                     template: "hata oluştu!!!"
+                   });
                 return;
             }
-            alert(JSON.stringify(result.data));
+            
             myStorage.setObject("session",result.data);
         }).error(function(error){
-            alert("hata oluştu 500");
+            $ionicPopup.alert({
+                 title: 'peoplagency',
+                 template: "hata oluştu!!!"
+               });
         });
     };
 });

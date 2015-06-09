@@ -23,6 +23,7 @@ app.controller('girisController', ['$scope', '$state', '$http', '$rootScope', 'm
                  myStorage.set("isActive",false);
             }
              myStorage.setObject("session",response.data);
+             myStorage.set("cikisYapildi",false);
              $rootScope.session=response.data;
              $scope.kullanici = {};
              $state.go('menu.anasayfa');

@@ -1,7 +1,6 @@
 app.controller('kayitController', ['myStorage', '$scope', '$state', '$http', 'Session', function(myStorage, $scope, $state, $http, Session){
     $scope.kullanici = {};
     $scope.kayit_ol = function (){
-        alert(Config.host);
         $scope.kullanici.profile_picture="img/profile.png";
         var yeniKullanici = $scope.kullanici;
         $http.post(Config.host + '/v1/account/register', yeniKullanici)

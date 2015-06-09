@@ -12,7 +12,6 @@
             <button class="button button-clear ion-search button-calm" ng-click="searchWithText(searchText)"></button>
       </div>
   <ion-content class="has-subheader">
-     
     <div class="list card" ng-repeat="item in itemList track by $index">
       <div class="item item-avatar">
       <img ng-src="{{item.accountInfo.profile_picture}}">
@@ -55,5 +54,11 @@
   <!--  <ion-infinite-scroll ng-if="!yuklemeTamamlandi"
         on-infinite="getMoreItem()" distance="1%">
     </ion-infinite-scroll>-->
+     <br>
+     <br>
+     <br>
   </ion-content>
+  <ion-footer-bar>
+      <button class="button button-balanced button-block ion-search" ng-click="alanaGoreAra()">Alana Göre Ara</button>
+  </ion-footer-bar>
 </ion-view>

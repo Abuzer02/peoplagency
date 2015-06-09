@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers','uiGmapgoogle-maps',"ngCordova"])
 
-.run(function($ionicPlatform, $rootScope, $ionicLoading,myStorage) {
+.run(function($ionicPlatform, $rootScope, $ionicLoading,myStorage,$window) {
     $rootScope.session=myStorage.getObject("session");
     $rootScope.showLoading = function() {
         $ionicLoading.show({
@@ -60,15 +60,6 @@ angular.module('starter', ['ionic', 'starter.controllers','uiGmapgoogle-maps',"n
         menuContent : {
             templateUrl: "templates/bildirim.html",
             controller:"BildirimCtrl"
-        }
-    }
-  })
-  .state('menu.alan', {
-    url: "/alan",
-    views : {
-        menuContent : {
-            templateUrl: "templates/alan.html",
-            controller:"AlanController"
         }
     }
   })

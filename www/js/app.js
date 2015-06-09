@@ -4,9 +4,10 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers',"ngCordova"])
+angular.module('starter', ['ionic', 'starter.controllers','uiGmapgoogle-maps',"ngCordova"])
 
-.run(function($ionicPlatform, $rootScope, $ionicLoading) {
+.run(function($ionicPlatform, $rootScope, $ionicLoading,myStorage) {
+    $rootScope.session=myStorage.getObject("session");
     $rootScope.showLoading = function() {
         $ionicLoading.show({
           template: '<img src="img/loading.gif"/>',
@@ -29,7 +30,14 @@ angular.module('starter', ['ionic', 'starter.controllers',"ngCordova"])
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
+.config(function($stateProvider, $urlRouterProvider, uiGmapGoogleMapApiProvider,$httpProvider) {
+    uiGmapGoogleMapApiProvider.configure({
+    key: 'AIzaSyDFberVyWaVDCxFLaRxYLxUuSd4uPb_I2s',
+    v: '3.17',
+    libraries: 'weather,geometry,visualization',
+    language: 'en',
+    sensor: 'false',
+  })
   $stateProvider
   .state('menu', {
     url: "/menu",
@@ -52,6 +60,33 @@ angular.module('starter', ['ionic', 'starter.controllers',"ngCordova"])
         menuContent : {
             templateUrl: "templates/bildirim.html",
             controller:"BildirimCtrl"
+        }
+    }
+  })
+  .state('menu.alan', {
+    url: "/alan",
+    views : {
+        menuContent : {
+            templateUrl: "templates/alan.html",
+            controller:"AlanController"
+        }
+    }
+  })
+  .state('menu.profile', {
+    url: "/profile",
+    views : {
+        menuContent : {
+            templateUrl: "templates/profile.html",
+            controller:"ProfileController"
+        }
+    }
+  })
+  .state('menu.ayarlar', {
+    url: "/ayarlar",
+    views : {
+        menuContent : {
+            templateUrl: "templates/ayarlar.html",
+            controller:"AyarlarController"
         }
     }
   })

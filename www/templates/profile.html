@@ -1,0 +1,55 @@
+<ion-view title="Profil Sayfası">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+<ion-nav-buttons side="right">
+    <button menu-toggle="right" class="button button-icon icon ion-person"></button>
+  </ion-nav-buttons>
+   <div class="bar bar-subheader bar-light">
+      <div class="item item-thumbnail-left">
+      <img ng-src="{{session.profile_picture}}">
+        <h2 style="font_weight:bold;">{{session.nickname}}</h2>
+            <p>
+               <a class="subdued"><span style="font_weight:bold;" class="calm">Bildirim :</span> {{session.report_count}}</a>
+               <a class="subdued"><span style="font_weight:bold;" class="balanced">Doğrulama :</span> {{session.verify_count}}</a>
+           </p>
+            <p>
+               <a class="subdued"><span style="font_weight:bold;" class="energized">Yorum :</span> {{session.comment_count}}</a> 
+               <a class="subdued"><span style="font_weight:bold;" class="assertive">Yalanlama :</span> {{session.refute_count}}</a> 
+            </p>
+      </div>
+    </div>
+  <ion-content class="has-subheader" > 
+   <br>
+   <br>
+   <br>
+    <div class="list card" ng-repeat="item in items">
+      <div class="item item-avatar">
+      <img ng-src="{{session.profile_picture}}">
+        <h2>{{session.nickname}}</h2>
+        <p>
+          <a class="" style="font-weight:bold;">Kategori : </a>
+          <a class="subdued" ng-repeat="category in item.alert_tags">{{category}}</a> 
+        </p>
+         <p>{{item.address}}</p>
+         <p>{{item.create_time}}</p>
+         <a ng-class="{energized : item.status=='Beklemede' ,balanced : item.status=='Çözüldü' ,assertive : item.status=='İptal Edildi' ,calm : item.status=='Onaylandı' }">{{item.status}} </a>
+      </div>
+      <div class="item item-body">
+      <img class="full-image" ng-src="{{item.picture_path}}">
+        <p style="font-weight:bold;">{{item.title}}</p>
+        <p>
+          {{item.description}}
+        </p>
+        <p>
+          <a href="#" class="subdued"><a id="verifyCount{{item._id}}">{{item.verify_count}}</a> Doğrulama</a>   
+          <a href="#" class="subdued"><a id="commentCount{{item._id}}">{{item.comment_count}}</a> Yorum</a>   
+          <a href="#" class="subdued"><a id="refuteCount{{item._id}}">{{item.refute_count}}</a> Yalanlama</a>   
+        </p>
+      </div>  
+    </div>
+    <ion-infinite-scroll ng-if="!yuklemeTamamlandi"
+        on-infinite="getNewItem()" distance="1%">
+    </ion-infinite-scroll>
+  </ion-content>
+</ion-view>

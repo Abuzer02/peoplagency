@@ -1,5 +1,5 @@
-<ion-view title='Giris'>
-    <ion-content>
+<ion-view title='Giris' ng-init="doSomething()">
+    <ion-content >
        <br>
        <br>
        <br>
@@ -37,7 +37,7 @@
             </div>
             <div class="col-50 text-left">
                 <label class="toggle toggle-calm">
-                   <input type="checkbox" class="calm">
+                   <input type="checkbox" class="calm" ng-model="item.checked" ng-checked="item.checked">
                    <div class="track">
                      <div class="handle"></div>
                    </div>

@@ -1,18 +1,29 @@
 <ion-view title="Anasayfa">
   <ion-nav-buttons side="left">
-    <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
-  <ion-content class="has-header">
+<ion-nav-buttons side="right">
+    <button menu-toggle="right" class="button button-icon icon ion-person"></button>
+  </ion-nav-buttons>
+       <div id="search-box" class="bar bar-subheader item-input-inset">
+           <div class="item-input-wrapper">
+             <input type="search" placeholder="Arama" ng-model="searchText">
+           </div>
+            <button class="button button-clear ion-search button-calm" ng-click="searchWithText(searchText)"></button>
+      </div>
+  <ion-content class="has-subheader">
+     
     <div class="list card" ng-repeat="item in itemList track by $index">
       <div class="item item-avatar">
       <img ng-src="{{item.accountInfo.profile_picture}}">
         <h2 ng-bind="item.accountInfo.nickname"></h2>
-        <a class="energized">{{item.obj.status}} </a>
         <p>
           <a class="" style="font-weight:bold;">Kategori :</a>
           <a class="subdued" ng-repeat="category in item.obj.alert_tags">{{category}}</a>
         </p>
+        <p>{{item.obj.address}}</p>
         <p>{{item.obj.create_time}}</p> 
+        <a ng-class="{energized : item.obj.status=='Beklemede' ,balanced : item.obj.status=='Çözüldü' ,assertive : item.obj.status=='İptal Edildi' ,calm : item.obj.status=='Onaylandı' }">{{item.obj.status}} </a>
       </div>
       <div class="item item-body">
         <img class="full-image" ng-src="{{item.obj.picture_path}}">
@@ -21,25 +32,28 @@
           {{item.obj.description}}
         </p>
         <p>
-          <a href="#" class="subdued"><a id="verifyCount{{item.obj._id}}">{{item.obj.verify_count}}</a> Doğrulama</a>   
-          <a href="#" class="subdued"><a id="commentCount{{item.obj._id}}">{{item.obj.comment_count}}</a> Yorum</a>   
-          <a href="#" class="subdued"><a id="refuteCount{{item.obj._id}}">{{item.obj.refute_count}}</a> Yalanlama</a>   
+          <a href="#" class="subdued">{{item.obj.verify_count}} Doğrulama</a>   
+          <a href="#" class="subdued">{{item.obj.comment_count}} Yorum</a>   
+          <a href="#" class="subdued">{{item.obj.refute_count}} Yalanlama</a>   
         </p>
       </div>
       <div class="item tabs tabs-secondary tabs-icon-left">
-        <a class="tab-item" href="#" ng-click="verify(item.obj._id)">
+        <a class="tab-item" href="#" ng-click="verify(item.obj._id,$index)" ng-disabled="item.obj.checkVerify">
           <i class="icon ion-checkmark-circled balanced"></i>
           Doğrula
         </a>
-        <a class="tab-item" href="#" ng-click="comment(item.obj._id)">
+        <a class="tab-item" href="#" ng-click="comment(item.obj._id,$index)">
           <i class="icon ion-chatbox calm"></i>
           Yorum
         </a>
-        <a class="tab-item" href="#" ng-click="refute(item.obj._id)">
+        <a class="tab-item" href="#" ng-click="refute(item.obj._id,$index)" ng-disabled="item.obj.checkRefute">
           <i class="icon ion-close-circled assertive"></i>
           Yalanla
         </a>
       </div>    
     </div>
+  <!--  <ion-infinite-scroll ng-if="!yuklemeTamamlandi"
+        on-infinite="getMoreItem()" distance="1%">
+    </ion-infinite-scroll>-->
   </ion-content>
 </ion-view>

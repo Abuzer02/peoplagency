@@ -1,9 +1,6 @@
 <ion-side-menus enable-menu-with-back-views="false">
   <ion-side-menu-content>
     <ion-nav-bar class="bar-stable bar-calm">
-      <ion-nav-back-button>
-      </ion-nav-back-button>
-
       <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
         </button>
@@ -30,6 +27,10 @@
             <i class="icon ion-camera"></i>
             Bildirim Yap
           </a>
+           <a class="item item-icon-left" menu-close href="#/menu/alan">
+            <i class="icon ion-search"></i>
+            Alana Göre Ara
+          </a>
           <a class="item item-icon-left" menu-close ng-click="cikis_yap()">
             <i class="icon ion-log-out"></i>
             Cikis
@@ -46,17 +47,17 @@
       <div class="card">
          <a class="item" href="#">
             <div class="text-center">
-                <img class="img-circle" style="border-radius:70%;width:120px;" src="https://avatars3.githubusercontent.com/u/3084207?v=3&s=400" alt="">
+                <img class="img-circle" style="border-radius:70%;width:120px;" ng-src="{{session.profile_picture}}" alt="">
             </div>
             <div class="text-center">
-                {{kullaniciIsim}} {{kullaniciSoyisim}}
+                {{session.nickname}}
             </div>
           </a>
-          <a class="item item-icon-left" menu-close href="#/menu/bildirim">
+          <a class="item item-icon-left" menu-close href="#/menu/profile">
             <i class="icon ion-person"></i>
             Profil
           </a>
-          <a class="item item-icon-left" menu-close href="#">
+          <a class="item item-icon-left" menu-close href="#/menu/ayarlar">
             <i class="icon ion-settings"></i>
             Ayarlar
           </a>

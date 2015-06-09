@@ -8,8 +8,8 @@ app
             address:"",
             lat:"",
             lon:"",
-            picture_path:"",
-            importance_level:"",
+            picture_path:"img/photo.png",
+            importance_level:50,
             extra_information:"",
             alert_tags:[],
             fk_account_id:id
@@ -27,11 +27,11 @@ app
                 animation: 'slide-in-up'
             });
         $scope.itemList = [
-            { text: "polis", checked: false },
-            { text: "hastane", checked: false },
-            { text: "itfaye", checked: false },
-            { text: "belediye", checked: false },
-            { text: "çoçuk esirgeme kurumu", checked: false }
+            { text: "Polis", checked: false },
+            { text: "Hastane", checked: false },
+            { text: "İtfaye", checked: false },
+            { text: "Belediye", checked: false },
+            { text: "Çoçuk esirgeme kurumu", checked: false }
           ];
         $scope.kategoriAl=function(){
             category=[];
@@ -43,24 +43,27 @@ app
             $scope.data.alert_tags=category;
             $scope.kategori_modal.hide();
         }
-        var posOptions = {timeout: 10000, enableHighAccuracy: false};
-          $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
-              $scope.data.lat=position.coords.latitude;
-              $scope.data.lon=position.coords.longitude;
-              $http.get("http://maps.googleapis.com/maps/api/geocode/json?latlng="+$scope.data.lat+","+$scope.data.lon+"&sensor=true").success(function(result){
-                $scope.data.address=result.results[0].formatted_address;
-              }).error(function(err){
-              
-              });
-            }, function(err) {
-              alert("Hata!!! lokasyon alınamadı lütfen konum izinlerini düzenleyiniz.");
-            });  
-    
-    
-    
         $scope.getPhoto = function() {
             Camera.getPicture().then(function(imageURI) {
                 $scope.imageUrl = imageURI;
+                var date = new Date();
+            
+                var options = {};
+                options.fileKey = "upload";
+                options.fileName = date + "foto.png";
+                options.chunkedMode = false;
+                options.mimeType = "image/png";
+
+                $ionicPlatform.ready(function() {
+                    $cordovaFileTransfer.upload(Config.host + "/v1/files/upload", encodeURI(imageURI), options)
+                        .then(function(result) {
+                            var resp = JSON.parse(result.response);
+                            $scope.data.picture_path =resp.data;
+                        }, function(error) {
+                            alert("Yukleme Hatası");
+                        });
+
+                }, false);
             }, function(err) {
                 console.err(err);
             });
@@ -68,34 +71,42 @@ app
 
         $scope.sendData = function() {
             $rootScope.showLoading();
-            var myImg = $scope.imageUrl;
-            var date = new Date();
-            
-            var options = {};
-            options.fileKey = "upload";
-            options.fileName = date + "foto.png";
-            options.chunkedMode = false;
-            options.mimeType = "image/png";
-
-            $ionicPlatform.ready(function() {
-                $cordovaFileTransfer.upload(Config.host + "/v1/files/upload", encodeURI(myImg), options)
-                    .then(function(result) {
-
-                        var resp = JSON.parse(result.response);
-                        $scope.data.picture_path = resp.data;
-                       
-                    $http.post(Config.host+"/v1/report/register",$scope.data).success(function(result){
-                        alert(JSON.stringify($scope.data));
+          var posOptions = {timeout: 10000, enableHighAccuracy: false};
+          $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
+              $scope.data.lat=position.coords.latitude;
+              $scope.data.lon=position.coords.longitude;
+              $http.get("http://maps.googleapis.com/maps/api/geocode/json?latlng="+$scope.data.lat+","+$scope.data.lon+"&sensor=true").success(function(result){
+                $scope.data.address=result.results[0].formatted_address;
+                  
+                $http.post(Config.host+"/v1/report/register",$scope.data).success(function(result){
+                    if(result.status!==200){
                         $rootScope.hideLoading();
-                        $state.transitionTo("menu.anasayfa");
-                    }).error(function(err){
-                        alert(err);
-                    });
-                    }, function(error) {
-
-                    });
-
-            }, false);
+                        alert("hata oluştu 500");
+                        return;
+                    }
+                    $rootScope.hideLoading();
+                    $scope.imageUrl=undefined;
+                    $scope.data={ title:"",description:"",address:"",lat:"", lon:"",picture_path:"img/photo.png",importance_level:50,extra_information:"",alert_tags:[],fk_account_id:id};
+                    $scope.itemList = [
+                                        { text: "Polis", checked: false },
+                                        { text: "Hastane", checked: false },
+                                        { text: "İtfaye", checked: false },
+                                        { text: "Belediye", checked: false },
+                                        { text: "Çoçuk esirgeme kurumu", checked: false }
+                                      ];
+                    $rootScope.session.report_count++;
+                    $state.go("menu.anasayfa");
+                }).error(function(err){
+                    $rootScope.hideLoading();
+                    alert(err);
+                });
+              }).error(function(err){
+                $rootScope.hideLoading();
+              });
+            }, function(err) {
+              $rootScope.hideLoading();
+              alert("Hata!!! lokasyon alınamadı lütfen konum izinlerini düzenleyiniz.");
+            });
 
         };
     });

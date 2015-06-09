@@ -2,14 +2,14 @@ app.controller('kayitController', ['myStorage', '$scope', '$state', '$http', 'Se
     $scope.kullanici = {};
     $scope.kayit_ol = function (){
         alert(Config.host);
-        $scope.kullanici.profile_picture="abc";
+        $scope.kullanici.profile_picture="img/profile.png";
         var yeniKullanici = $scope.kullanici;
         $http.post(Config.host + '/v1/account/register', yeniKullanici)
         .success(function(response, status, headers, config) {
             if(response.status==200){
                 myStorage.setObject("session",response.data);
                 myStorage.set("isActive",true);
-                $state.go('menu.anasayfa');
+                $state.go('giris');
             }else if(response.status==302){
                 alert("zaten Üyesiniz.");
                 $state.go("menu.anasayfa");

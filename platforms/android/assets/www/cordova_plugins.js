@@ -62,6 +62,13 @@ module.exports = [
         "runs": true
     },
     {
+        "file": "plugins/org.apache.cordova.inappbrowser/www/inappbrowser.js",
+        "id": "org.apache.cordova.inappbrowser.inappbrowser",
+        "clobbers": [
+            "window.open"
+        ]
+    },
+    {
         "file": "plugins/org.apache.cordova.file/www/DirectoryEntry.js",
         "id": "org.apache.cordova.file.DirectoryEntry",
         "clobbers": [
@@ -218,6 +225,7 @@ module.exports.metadata =
     "org.apache.cordova.file-transfer": "0.5.0",
     "cordova-plugin-whitelist": "1.0.0",
     "cordova-plugin-geolocation": "1.0.1-dev",
+    "org.apache.cordova.inappbrowser": "0.6.0",
     "org.apache.cordova.file": "1.3.3"
 }
 // BOTTOM OF METADATA
